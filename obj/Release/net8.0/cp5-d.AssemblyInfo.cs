@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("cp5-d")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bf67b44eb8c0935d5041f8ec1b355b2c1629341d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4ccfe263cfc294f53135c82d4dee2300603330ac")]
 [assembly: System.Reflection.AssemblyProductAttribute("cp5-d")]
 [assembly: System.Reflection.AssemblyTitleAttribute("cp5-d")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
