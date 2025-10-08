@@ -55,7 +55,7 @@ az webapp config appsettings set -g "$resourceGroup" -n "$appName" --settings \
   APPLICATIONINSIGHTS_CONNECTION_STRING="$aiConn" \
   ASPNETCORE_ENVIRONMENT=Production
 
-# Publica��o local em zip (deploy)
+# Publicacao local em zip (deploy)
 # Executar a partir da raiz do projeto (mesma pasta deste script)
 dotnet publish ./cp5-d.csproj -c Release -o publish
 (
