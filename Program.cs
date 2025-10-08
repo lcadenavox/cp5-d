@@ -25,6 +25,8 @@ var csEnv =
     ?? Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection")
     ?? Environment.GetEnvironmentVariable("SQLCONNSTR_SqlServer")
     ?? Environment.GetEnvironmentVariable("SQLCONNSTR_DefaultConnection")
+    ?? Environment.GetEnvironmentVariable("MYSQLCONNSTR_SqlServer")
+    ?? Environment.GetEnvironmentVariable("MYSQLCONNSTR_DefaultConnection")
     ?? Environment.GetEnvironmentVariable("CUSTOMCONNSTR_SqlServer")
     ?? Environment.GetEnvironmentVariable("CUSTOMCONNSTR_DefaultConnection");
 var connectionString = csSqlServer
