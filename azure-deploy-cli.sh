@@ -39,12 +39,20 @@ echo "SQL ConnectionString: $connStr"
 
 # App Service (Linux)
 az appservice plan create -g "$resourceGroup" -n "$appName-plan" --sku B1 --is-linux
-az webapp create -g "$resourceGroup" -p "$appName-plan" -n "$appName" -r "DOTNETCORE|8.0"
+az webapp create -g "$resourceGroup" -p "$appName-plan" -n "$appName" -r "DOTNET|8.0"
 
 # Configurar appsettings como vari�veis
+# 1) Connection strings tipadas (portal > Connection strings)
+az webapp config connection-string set -g "$resourceGroup" -n "$appName" \
+  --settings SqlServer="$connStr" DefaultConnection="$connStr" \
+  --connection-string-type SQLAzure
+
+# 2) App Settings fallbacks
 az webapp config appsettings set -g "$resourceGroup" -n "$appName" --settings \
   ConnectionStrings__SqlServer="$connStr" \
+  ConnectionStrings__DefaultConnection="$connStr" \
   ApplicationInsights__ConnectionString="$aiConn" \
+  APPLICATIONINSIGHTS_CONNECTION_STRING="$aiConn" \
   ASPNETCORE_ENVIRONMENT=Production
 
 # Publica��o local em zip (deploy)

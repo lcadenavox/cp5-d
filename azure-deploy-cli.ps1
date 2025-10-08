@@ -51,13 +51,22 @@ $connStr = "Server=tcp:$SqlServerName.database.windows.net,1433;Initial Catalog=
 Write-Host "SQL ConnectionString: $connStr"
 
 Write-Host "==> Create App Service Plan and Web App: $AppName" -ForegroundColor Cyan
+# Linux plan + .NET 8 runtime (use DOTNET|8.0 for current stack names)
 az appservice plan create -g $ResourceGroup -n "$AppName-plan" --sku B1 --is-linux | Out-Null
-az webapp create -g $ResourceGroup -p "$AppName-plan" -n $AppName -r "DOTNETCORE|8.0" | Out-Null
+az webapp create -g $ResourceGroup -p "$AppName-plan" -n $AppName -r "DOTNET|8.0" | Out-Null
 
 Write-Host "==> Configure app settings (connection strings and environment)" -ForegroundColor Cyan
+# 1) Set typed connection strings (visible em Configuration > Connection strings)
+az webapp config connection-string set -g $ResourceGroup -n $AppName `
+  --settings SqlServer="$connStr" DefaultConnection="$connStr" `
+  --connection-string-type SQLAzure | Out-Null
+
+# 2) Set app settings fallback keys (Program.cs lê essas variáveis se necessário)
 az webapp config appsettings set -g $ResourceGroup -n $AppName --settings `
   ConnectionStrings__SqlServer="$connStr" `
+  ConnectionStrings__DefaultConnection="$connStr" `
   ApplicationInsights__ConnectionString="$aiConn" `
+  APPLICATIONINSIGHTS_CONNECTION_STRING="$aiConn" `
   ASPNETCORE_ENVIRONMENT=Production | Out-Null
 
 if ($SkipDeploy) {
