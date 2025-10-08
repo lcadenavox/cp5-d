@@ -1,0 +1,15 @@
+{
+  "Loja": {
+    "create": { "nome": "Loja Centro", "endereco": "Rua A, 123", "telefone": "(11) 1111-1111" },
+    "update": { "id": 1, "nome": "Loja Norte", "endereco": "Av. B, 456", "telefone": "(11) 2222-2222" }
+  },
+  "Carro": {
+    "create": { "marca": "Toyota", "modelo": "Corolla", "ano": 2020, "preco": 95000.0, "lojaId": 1 },
+    "update": { "id": 1, "marca": "Honda", "modelo": "Civic", "ano": 2019, "preco": 88000.0, "lojaId": 1 }
+  },
+  "Vendedor": {
+    "create": { "nome": "Ana Silva", "email": "ana@loja.com", "telefone": "(11) 9999-0001", "lojaId": 1 },
+    "update": { "id": 1, "nome": "Carlos Souza", "email": "carlos@loja.com", "telefone": "(11) 9999-0002", "lojaId": 2 }
+  },
+  "endpointsObservacao": "Este projeto é MVC com Views. Se você optar por expor API REST, essas cargas JSON podem ser usadas para POST/PUT."
+}

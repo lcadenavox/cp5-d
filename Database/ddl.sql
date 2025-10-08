@@ -1,0 +1,43 @@
+-- Script DDL para projeto DimDim (SQL Server)
+
+IF DB_ID('DimDimDb') IS NULL
+BEGIN
+    CREATE DATABASE DimDimDb;
+END
+GO
+USE DimDimDb;
+GO
+
+IF OBJECT_ID('dbo.Lojas','U') IS NOT NULL DROP TABLE dbo.Lojas;
+IF OBJECT_ID('dbo.Carros','U') IS NOT NULL DROP TABLE dbo.Carros;
+IF OBJECT_ID('dbo.Vendedores','U') IS NOT NULL DROP TABLE dbo.Vendedores;
+GO
+
+CREATE TABLE dbo.Lojas (
+    Id INT IDENTITY(1,1) CONSTRAINT PK_Lojas PRIMARY KEY,
+    Nome NVARCHAR(100) NOT NULL,
+    Endereco NVARCHAR(200) NULL,
+    Telefone NVARCHAR(50) NULL
+);
+GO
+
+CREATE TABLE dbo.Carros (
+    Id INT IDENTITY(1,1) CONSTRAINT PK_Carros PRIMARY KEY,
+    Marca NVARCHAR(80) NOT NULL,
+    Modelo NVARCHAR(80) NOT NULL,
+    Ano INT NOT NULL,
+    Preco DECIMAL(18,2) NOT NULL,
+    LojaId INT NOT NULL CONSTRAINT FK_Carros_Lojas REFERENCES dbo.Lojas(Id)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+GO
+
+CREATE TABLE dbo.Vendedores (
+    Id INT IDENTITY(1,1) CONSTRAINT PK_Vendedores PRIMARY KEY,
+    Nome NVARCHAR(120) NOT NULL,
+    Email NVARCHAR(256) NULL,
+    Telefone NVARCHAR(50) NULL,
+    LojaId INT NOT NULL CONSTRAINT FK_Vendedores_Lojas REFERENCES dbo.Lojas(Id)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+GO
